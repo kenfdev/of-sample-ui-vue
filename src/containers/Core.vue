@@ -1,10 +1,7 @@
 <template>
   <md-app>
-    <md-app-toolbar>
-      <h3 class="md-title">Default</h3>
-    </md-app-toolbar>
     <md-app-drawer md-permanent="clipped">
-      <func-list :functions="functions" :selected="showFunction"></func-list>
+      <func-side-nav :functions="functions" :selected="showFunction"></func-side-nav>
     </md-app-drawer>
 
     <md-app-content>
@@ -15,11 +12,11 @@
 </template>
 
 <script>
-import FuncList from '@/components/FuncList';
+import FuncSideNav from '@/components/FuncSideNav';
 import FuncDetail from '@/components/FuncDetail';
 
 export default {
-  components: { FuncList, FuncDetail },
+  components: { FuncSideNav, FuncDetail },
   data() {
     return {
       selectedFunction: null,
