@@ -12,8 +12,12 @@
         </md-list-item>
         <new-func-dialog :show-dialog="showNewFuncDialog" :on-close="onClose" :on-deploy="onDeploy"></new-func-dialog>
       </md-list>
+      <md-field v-if="isSearchVisible">
+        <label>Search for Function</label>
+        <md-input v-model="search"></md-input>
+      </md-field>
       <md-list>
-        <md-list-item @click="functionSelected(func)" v-for="(func, index) in functions" :key="index">
+        <md-list-item @click="functionSelected(func)" v-for="(func, index) in viewableFunctions" :key="index">
           {{func.name}}
         </md-list-item>
       </md-list>
@@ -29,8 +33,17 @@ export default {
   props: ['functions', 'selected'],
   data() {
     return {
+      search: '',
       showNewFuncDialog: false,
     };
+  },
+  computed: {
+    isSearchVisible() {
+      return this.functions && this.functions.length > 0;
+    },
+    viewableFunctions() {
+      return this.functions.filter(f => f.name.toLowerCase().includes(this.search.toLowerCase()));
+    }
   },
   methods: {
     newFunction() {
