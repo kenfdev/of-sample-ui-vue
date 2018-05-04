@@ -1,5 +1,5 @@
 <template>
-  <md-dialog :md-active.sync="showDialog">
+  <md-dialog :md-active.sync="isDialogActive" @md-closed="close()">
     <md-dialog-title>Preferences</md-dialog-title>
 
     <md-tabs md-dynamic-height>
@@ -17,10 +17,6 @@
         <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ullam mollitia dolorum dolores quae commodi impedit possimus qui, atque at voluptates cupiditate. Neque quae culpa suscipit praesentium inventore ducimus ipsa aut.</p>
       </md-tab>
 
-      <md-tab md-label="Account">
-        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ullam mollitia dolorum dolores quae commodi impedit possimus qui, atque at voluptates cupiditate. Neque quae culpa suscipit praesentium inventore ducimus ipsa aut.</p>
-        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ullam mollitia dolorum dolores quae commodi impedit possimus qui, atque at voluptates cupiditate. Neque quae culpa suscipit praesentium inventore ducimus ipsa aut.</p>
-      </md-tab>
     </md-tabs>
 
     <md-dialog-actions>
@@ -32,13 +28,25 @@
 
 <script>
 export default {
-  props: ['showDialog', 'onClose', 'onDeploy'],
+  props: ['showDialog'],
+  watch: {
+    showDialog(val, oldVal) {
+      if (val !== oldVal) {
+        this.isDialogActive = val;
+      }
+    }
+  },
+  data() {
+    return {
+      isDialogActive: false,
+    };
+  },
   methods: {
     close() {
-      this.onClose();
+      this.$emit('closed');
     },
     deploy() {
-      this.onDeploy();
+      this.$emit('submitted');
     }
   }
 }

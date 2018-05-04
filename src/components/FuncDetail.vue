@@ -61,7 +61,7 @@
 
 <script>
 export default {
-  props: ['func', 'onInvoke'],
+  props: ['func'],
   data() {
     return {
       invocation: {
@@ -75,7 +75,7 @@ export default {
   },
   methods: {
     invoke() {
-      this.onInvoke(this.invocation);
+      this.$emit('invoked', this.invocation);
     }
   }
 }

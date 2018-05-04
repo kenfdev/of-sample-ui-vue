@@ -6,11 +6,10 @@
     </md-app-toolbar>
     <md-content>
       <md-list>
-        <md-list-item @click="newFunction()">
+        <md-list-item @click="deployNewFunction()">
           <md-icon md-src="static/img/icons/ic_shop_two_black_24px.svg"></md-icon>
           <span class="md-list-item-text">Deploy New Function</span>
         </md-list-item>
-        <new-func-dialog :show-dialog="showNewFuncDialog" :on-close="onClose" :on-deploy="onDeploy"></new-func-dialog>
       </md-list>
       <md-field v-if="isSearchVisible">
         <label>Search for Function</label>
@@ -27,14 +26,11 @@
 </template>
 
 <script>
-import NewFuncDialog from '@/components/NewFuncDialog';
 export default {
-  components: { NewFuncDialog },
-  props: ['functions', 'selected'],
+  props: ['functions'],
   data() {
     return {
       search: '',
-      showNewFuncDialog: false,
     };
   },
   computed: {
@@ -46,19 +42,11 @@ export default {
     }
   },
   methods: {
-    newFunction() {
-      console.log(this.showNewFuncDialog);
-      this.showNewFuncDialog = true;
-      console.log(this.showNewFuncDialog);
-    },
-    onClose() {
-      this.showNewFuncDialog = false;
-    },
-    onDeploy() {
-      this.showNewFuncDialog = false;
+    deployNewFunction() {
+      this.$emit('new-func-requested');
     },
     functionSelected(func) {
-      this.selected(func);
+      this.$emit('selected', func);
     }
   }
 }

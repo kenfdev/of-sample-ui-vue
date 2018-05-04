@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Core from '@/containers/Core'
+import MainPage from '@/containers/MainPage'
 
 Vue.use(Router)
 
@@ -9,7 +9,7 @@ export default new Router({
     {
       path: '/',
       name: 'Core',
-      component: Core
+      component: MainPage
     }
   ]
 })
