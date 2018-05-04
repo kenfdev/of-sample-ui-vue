@@ -13,9 +13,12 @@
 </template>
 
 <script>
-import NewFuncDialog from '@/components/NewFuncDialog';
+import NewFuncDialog from '@/containers/NewFuncDialog';
 import FuncSideNav from '@/components/FuncSideNav';
 import FuncDetail from '@/components/FuncDetail';
+import axios from 'axios';
+
+const FETCH_FUNCTIONS_DELAY = 3500;
 
 export default {
   components: { FuncSideNav, FuncDetail, NewFuncDialog },
@@ -23,12 +26,22 @@ export default {
     return {
       isShowNewFuncDialog: false,
       selectedFunction: null,
-      // FIXME: mock data
-      functions: [
-        { name: 'Function A', replicas: 1, invocationCount: 1, image: 'image/function-a' },
-        { name: 'Function B', replicas: 1, invocationCount: 1, image: 'image/function-b' },
-      ]
+      functions: [],
+      fetchFuncInterval: null,
     };
+  },
+  mounted() {
+    console.log('mounted')
+    this.fetchFuncInterval = setInterval(() => {
+      axios.get('../system/functions')
+        .then(res => {
+          console.log('fetched', res.data);
+          this.functions = res.data;
+        })
+    }, FETCH_FUNCTIONS_DELAY)
+  },
+  beforeDestroy() {
+    clearInterval(this.fetchFuncInterval);
   },
   methods: {
     showNewFuncDialog() {

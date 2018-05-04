@@ -1,19 +1,18 @@
 <template>
-  <div>
-  </div>
 </template>
 
 <script>
+
 export default {
-  props: [],
+  components: {},
   data() {
-    return {
-    }
+    return {};
   },
   methods: {
   }
-}
+};
 </script>
 
 <style scoped>
+
 </style>

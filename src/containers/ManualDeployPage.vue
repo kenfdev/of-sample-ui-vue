@@ -2,15 +2,16 @@
 </template>
 
 <script>
-
+import FuncForm from '@/components/FuncForm';
 export default {
-  components: {},
+  components: { FuncForm },
   data() {
-    return {};
+    return {
+    };
   },
   methods: {
   }
-};
+}
 </script>
 
 <style scoped>
