@@ -65,6 +65,6 @@ export default {
 
 <style scoped>
 .md-dialog {
-  max-width: 768px;
+  width: 70%;
 }
 </style>
