@@ -12,9 +12,12 @@ export default {
 
 <style>
 .md-dialog .md-tabs-content {
-  overflow: scroll !important;
+  /* overflow: scroll !important; */
 }
 .md-dialog .md-tabs-navigation {
   display: block;
+}
+.md-dialog > .md-dialog-container {
+  width: 100%;
 }
 </style>

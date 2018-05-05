@@ -6,16 +6,20 @@
         <md-input v-model="search"></md-input>
       </md-field>
       <md-list>
-        <md-list-item @click="functionSelected(func)" v-for="(func, index) in viewableFunctions" :key="index">
-          <img v-if="func.icon" :src="func.icon" class="md-avatar" :alt="func.name" style="border-radius: 0" />
-          <span v-if="!func.icon" class="md-avatar">{{ func.title | limit(1) }}</span>
-          <div class="md-list-item-text" layout="column">
-            <h3>{{ func.title }}</h3>
-            <p>{{ func.description }}</p>
-          </div>
-          <md-icon v-if="func.repo_url" class="link md-secondary" @click="openRepo(func.repo_url)" aria-label="repo-link" md-svg-src="img/icons/ic_link_black_24px.svg"></md-icon>
-          <!-- <md-divider md-inset ng-if="!$last"></md-divider> -->
-        </md-list-item>
+        <div v-for="(func, index) in viewableFunctions" :key="index">
+          <md-list-item @click="functionSelected(func)">
+            <img v-if="func.icon" :src="func.icon" class="md-avatar" :alt="func.name" style="border-radius: 0" />
+            <span v-if="!func.icon" class="md-avatar">{{ func.title | limit(1) }}</span>
+            <div class="md-list-item-text" layout="column">
+              <h3>{{ func.title }}</h3>
+              <p>{{ func.description }}</p>
+            </div>
+            <md-button v-if="func.repo_url" class="md-icon-button md-list-action" @click="openRepo(func.repo_url)">
+              <md-icon class="md-primary" md-src="static/img/icons/ic_link_black_24px.svg"></md-icon>
+            </md-button>
+          </md-list-item>
+          <md-divider class="md-inset"></md-divider>
+        </div>
       </md-list>
     </md-content>
   </div>
@@ -45,5 +49,7 @@ export default {
 </script>
 
 <style scoped>
-
+.md-list-item-text {
+  white-space: normal;
+}
 </style>

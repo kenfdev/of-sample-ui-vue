@@ -2,15 +2,17 @@
   <md-dialog :md-active.sync="isDialogActive" @md-opened="opened()" @md-closed="close()">
     <md-dialog-title>Deploy A New Function</md-dialog-title>
 
-    <md-tabs md-dynamic-height>
-      <md-tab md-label="From Store">
-        <func-store-page :functions="storeFunctions"></func-store-page>
-      </md-tab>
+    <md-dialog-content>
+      <md-tabs md-dynamic-height>
+        <md-tab md-label="From Store">
+          <func-store-page :functions="storeFunctions"></func-store-page>
+        </md-tab>
 
-      <md-tab md-label="Manually">
-        <manual-deploy-page></manual-deploy-page>
-      </md-tab>
-    </md-tabs>
+        <md-tab md-label="Manually">
+          <manual-deploy-page></manual-deploy-page>
+        </md-tab>
+      </md-tabs>
+    </md-dialog-content>
 
     <md-dialog-actions>
       <md-button class="md-primary" @click="close()">Close</md-button>
