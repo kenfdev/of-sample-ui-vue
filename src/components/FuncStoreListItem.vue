@@ -1,6 +1,6 @@
 <template>
   <div>
-    <md-list-item @click="selectItem(item)">
+    <md-list-item :class="{ selected: isSelected }" @click="selectItem(item)">
       <img v-if="item.icon" :src="item.icon" class="md-avatar" :alt="item.name" style="border-radius: 0" />
       <span v-if="!item.icon" class="md-avatar">{{ item.title | limit(1) }}</span>
       <div class="md-list-item-text" layout="column">
@@ -18,10 +18,7 @@
 <script>
 
 export default {
-  props: ['item'],
-  data() {
-    return {};
-  },
+  props: ['item', 'isSelected'],
   methods: {
     selectItem(item) {
       this.$emit('selected', item);

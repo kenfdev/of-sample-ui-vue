@@ -6,7 +6,13 @@
         <md-input v-model="search"></md-input>
       </md-field>
       <md-list>
-        <func-store-list-item :item="func" v-for="(func, index) in viewableFunctions" :key="index" @selected="functionSelected" @link-clicked="openRepo"></func-store-list-item>
+        <func-store-list-item v-for="(func, index) in viewableFunctions"
+                              :key="index"
+                              :item="func"
+                              :is-selected="isFunctionSelected(func)"
+                              @selected="functionSelected"
+                              @link-clicked="openRepo">
+        </func-store-list-item>
       </md-list>
     </md-content>
   </div>
@@ -19,6 +25,7 @@ export default {
   props: ['functions'],
   data() {
     return {
+      selectedFunction: null,
       search: '',
     };
   },
@@ -28,8 +35,12 @@ export default {
     }
   },
   methods: {
+    isFunctionSelected(func) {
+      return this.selectedFunction && this.selectedFunction.name === func.name;
+    },
     functionSelected(func) {
-      console.log('selected', func);
+      this.selectedFunction = func;
+      this.$emit('selected', func);
     },
     openRepo(url) {
       window.open(url, '_blank');
@@ -39,4 +50,5 @@ export default {
 </script>
 
 <style scoped>
+
 </style>

@@ -1,12 +1,16 @@
 <template>
   <div id="app">
-    <router-view/>
+    <main-page></main-page>
   </div>
 </template>
 
 <script>
+import MainPage from '@/containers/MainPage';
+
 export default {
-  name: 'app'
+  name: 'app',
+  components: { MainPage }
+
 }
 </script>
 
@@ -19,5 +23,8 @@ export default {
 }
 .md-dialog > .md-dialog-container {
   width: 100%;
+}
+.md-list.md-theme-default .md-list-item.selected .md-list-item-container {
+  background-color: rgba(0, 0, 0, 0.12);
 }
 </style>

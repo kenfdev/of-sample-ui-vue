@@ -2,7 +2,7 @@
   <md-app>
     <md-app-drawer md-permanent="clipped">
       <func-side-nav :functions="functions" @selected="showFunction" @new-func-requested="showNewFuncDialog"></func-side-nav>
-      <new-func-dialog :show-dialog="isShowNewFuncDialog" @closed="onDialogClose" @submitted="deployFunction"></new-func-dialog>
+      <new-func-dialog :show-dialog="isShowNewFuncDialog" @closed="onDialogClose"></new-func-dialog>
     </md-app-drawer>
 
     <md-app-content>
@@ -50,9 +50,6 @@ export default {
       console.log(this.isShowNewFuncDialog);
     },
     onDialogClose() {
-      this.isShowNewFuncDialog = false;
-    },
-    deployFunction() {
       this.isShowNewFuncDialog = false;
     },
     showFunction(func) {
