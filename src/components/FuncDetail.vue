@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="func-detail">
     <md-card>
       <md-card-header>
         <md-card-header-text>
@@ -21,21 +21,26 @@
 
       <md-card-content>
         <div class="md-layout">
-          <md-field class="md-layout-item">
+          <md-field class="md-layout-item  md-size-20">
+            <label>Status</label>
+            <md-input :value="funcStatus"
+                      readonly></md-input>
+          </md-field>
+          <md-field class="md-layout-item  md-size-20">
             <label>Replicas</label>
-            <md-input v-model="func.replicas"
+            <md-input :value="func.replicas"
                       readonly></md-input>
           </md-field>
           <md-field class="md-layout-item">
             <label>Invocation Count</label>
-            <md-input v-model="func.invocationCount"
+            <md-input :value="func.invocationCount"
                       readonly></md-input>
           </md-field>
         </div>
         <div class="md-layout">
           <md-field class="md-layout-item">
             <label>Image</label>
-            <md-input v-model="func.image"
+            <md-input :value="func.image"
                       readonly></md-input>
           </md-field>
         </div>
@@ -48,6 +53,8 @@
 
       <md-card-content>
         <md-button class="md-raised"
+                   style="margin-top: 18px;"
+                   :disabled="cannotInvoke"
                    @click="invoke()">Invoke</md-button>
         <div>
           <md-radio v-model="invocation.contentType"
@@ -59,26 +66,27 @@
         </div>
         <md-field>
           <label>Request Body</label>
-          <md-textarea v-model="invocation.request"
+          <md-textarea class="request monospace"
+                       v-model="invocation.request"
                        cols="80"
                        rows="4"></md-textarea>
         </md-field>
         <div class="md-layout">
           <md-field class="md-layout-item">
             <label>Response Status</label>
-            <md-input v-model="invocationStatus"
+            <md-input :value="invocationStatus"
                       readonly></md-input>
           </md-field>
           <md-field class="md-layout-item">
             <label>Round-trip (s)</label>
-            <md-input v-model="roundTripDuration"
+            <md-input :value="roundTripDuration"
                       readonly></md-input>
           </md-field>
         </div>
         <md-field>
           <label>Response Body</label>
-          <md-textarea v-model="invocationResponse"
-                       :disabled="true"
+          <md-textarea class="response monospace"
+                       :value="invocationResponse"
                        cols="80"
                        rows="10"></md-textarea>
         </md-field>
@@ -89,17 +97,22 @@
 
 <script>
 export default {
-  props: ['func'],
+  props: ['func', 'invocationStatus', 'roundTripDuration', 'invocationResponse', 'invocationInProgress'],
   data() {
     return {
       invocation: {
         contentType: 'text',
         request: '',
       },
-      invocationStatus: '',
-      roundTripDuration: '',
-      invocationResponse: '',
       isShowDeleteDialog: false,
+    }
+  },
+  computed: {
+    funcStatus() {
+      return this.func.ready ? 'Ready' : 'Not Ready';
+    },
+    cannotInvoke() {
+      return this.invocationInProgress || !this.func.ready
     }
   },
   methods: {
@@ -117,7 +130,32 @@ export default {
 </script>
 
 <style scoped>
+.func-detail .md-layout-item {
+  margin-left: 2px;
+  margin-right: 2px;
+}
+
+.md-card-header {
+  padding: 16px 16px 0px 16px;
+}
+
+.md-field {
+  margin: 4px 0 0;
+}
+
 .md-radio {
-  display: flex;
+  font-size: 16px;
+}
+
+textarea.request {
+  height: 108px;
+}
+
+textarea.response {
+  height: 270px;
+}
+
+.monospace {
+  font-family: 'Roboto Mono', monospace;
 }
 </style>

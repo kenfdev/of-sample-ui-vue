@@ -1,24 +1,35 @@
 <template>
   <div>
-    <md-app-toolbar>
-      <a href="https://www.openfaas.com/" target="_blank"><img src="static/img/icon.png" alt="OpenFaaS Icon" width="60px" height="60px" class="md-avatar" /></a>
+    <md-app-toolbar class="indigo"
+                    md-elevation="0">
+      <a href="https://www.openfaas.com/"
+         target="_blank"><img src="static/img/icon.png"
+             alt="OpenFaaS Icon"
+             width="60px"
+             height="60px"
+             class="md-avatar" /></a>
       <h3 class="md-title">&nbsp; OpenFaaS Portal</h3>
     </md-app-toolbar>
-    <md-content>
+    <md-content class="layout-padding">
       <md-list>
         <md-list-item @click="deployNewFunction()">
           <md-icon md-src="static/img/icons/ic_shop_two_black_24px.svg"></md-icon>
-          <span class="md-list-item-text">Deploy New Function</span>
+          <span class="primary md-list-item-text">Deploy New Function</span>
         </md-list-item>
       </md-list>
       <md-field v-if="isSearchVisible">
         <label>Search for Function</label>
         <md-input v-model="search"></md-input>
       </md-field>
-      <md-list>
-        <md-list-item @click="functionSelected(func)" v-for="(func, index) in viewableFunctions" :key="index">
-          {{func.name}}
-        </md-list-item>
+      <md-list class="function-list">
+        <div v-for="(func, index) in viewableFunctions"
+             :key="index">
+          <md-list-item @click="functionSelected(func)"
+                        :class="{ selected: isFuncSelected(func) }">
+            {{func.name}}
+          </md-list-item>
+          <md-divider v-if="!(index === viewableFunctions.length - 1)"></md-divider>
+        </div>
       </md-list>
     </md-content>
 
@@ -27,7 +38,7 @@
 
 <script>
 export default {
-  props: ['functions'],
+  props: ['functions', 'selectedFunction'],
   data() {
     return {
       search: '',
@@ -47,11 +58,28 @@ export default {
     },
     functionSelected(func) {
       this.$emit('selected', func);
+    },
+    isFuncSelected(func) {
+      return this.selectedFunction && this.selectedFunction.name === func.name;
     }
   }
 }
 </script>
 
-<style>
+<style scoped>
+.md-toolbar {
+  background-color: rgb(63, 81, 181);
+}
 
+.md-list-item-button {
+  font-size: 16px;
+}
+
+.function-list .md-list-item-button {
+  height: 88px;
+}
+
+.md-toolbar h3.md-title {
+  color: rgba(255, 255, 255, 0.87);
+}
 </style>

@@ -16,6 +16,9 @@ class FunctionsService {
   fetchFunctions() {
     return axios.get('../system/functions').then(res => res.data);
   }
+  queryFunction(func) {
+    return axios.get(`../system/function/${func.name}`).then(res => res.data);
+  }
   fetchStore() {
     return axios
       .get('https://raw.githubusercontent.com/openfaas/store/master/store.json')
@@ -23,6 +26,25 @@ class FunctionsService {
   }
   create(func) {
     return axios.post('../system/functions', func).then(res => res.data);
+  }
+  invoke(func, invocation) {
+    let requestContentType =
+      invocation.contentType === 'json' ? 'application/json' : 'text/plain';
+
+    if (invocation.contentType === 'binary') {
+      requestContentType = 'binary/octet-stream';
+    }
+    const responseType =
+      invocation.contentType === 'binary'
+        ? 'arraybuffer'
+        : invocation.contentType;
+
+    return axios.post(`../function/${func.name}`, invocation.request, {
+      headers: {
+        'Content-Type': requestContentType
+      },
+      responseType
+    });
   }
   delete(func) {
     return axios
