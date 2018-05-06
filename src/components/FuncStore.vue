@@ -50,5 +50,7 @@ export default {
 </script>
 
 <style scoped>
-
+.md-list.md-theme-default {
+  background-color: transparent;
+}
 </style>

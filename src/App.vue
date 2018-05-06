@@ -15,8 +15,23 @@ export default {
 </script>
 
 <style>
+.md-icon.md-icon-image.link svg {
+  fill: #303aa5;
+  opacity: 0.6;
+}
+
+.md-app-internal-drawer .md-app-scroller {
+  overflow: hidden;
+}
+.md-content.md-theme-default {
+  color: rgba(0, 0, 0, 0.87);
+  background-color: rgb(250, 250, 250);
+}
 .md-app-content {
   padding: 0;
+}
+.md-field.md-has-value .md-textarea {
+  font-size: 19px;
 }
 
 .md-app-content .md-card {
@@ -26,7 +41,9 @@ export default {
 .md-field.md-theme-default:after {
   background-color: rgba(0, 0, 0, 0.12);
 }
-
+.md-field.md-theme-default.md-has-textarea:not(.md-autogrow):after {
+  border-color: rgba(0, 0, 0, 0.12);
+}
 .layout-padding {
   padding: 8px;
 }
@@ -71,5 +88,15 @@ export default {
 .primary {
   color: rgb(63, 81, 181);
   font-weight: 500;
+}
+.md-button.md-theme-default.md-raised:not([disabled]) {
+  color: rgb(33, 33, 33);
+  background-color: rgb(250, 250, 250);
+}
+.md-field.md-theme-default label {
+  color: rgba(0, 0, 0, 0.38);
+}
+.md-button.md-icon-button {
+  margin: 0 6px;
 }
 </style>

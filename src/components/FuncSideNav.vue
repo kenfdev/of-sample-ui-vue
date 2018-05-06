@@ -6,8 +6,7 @@
          target="_blank"><img src="static/img/icon.png"
              alt="OpenFaaS Icon"
              width="60px"
-             height="60px"
-             class="md-avatar" /></a>
+             height="60px" /></a>
       <h3 class="md-title">&nbsp; OpenFaaS Portal</h3>
     </md-app-toolbar>
     <md-content class="layout-padding">
@@ -71,6 +70,10 @@ export default {
   background-color: rgb(63, 81, 181);
 }
 
+.md-content.md-theme-default {
+  background-color: rgb(255, 255, 255);
+}
+
 .md-list-item-button {
   font-size: 16px;
 }
@@ -81,5 +84,18 @@ export default {
 
 .md-toolbar h3.md-title {
   color: rgba(255, 255, 255, 0.87);
+  margin-left: 0px;
+}
+
+.layout-padding {
+  padding: 16px;
+}
+
+.md-list-item-content > .md-icon:first-child {
+  margin-right: 16px;
+}
+
+.md-field {
+  margin-bottom: 8px;
 }
 </style>

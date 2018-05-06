@@ -48,14 +48,16 @@
     </md-card>
     <md-card>
       <md-card-header>
-        <div class="md-title">Invoke Function</div>
+        <div class="md-title">Invoke function</div>
       </md-card-header>
 
       <md-card-content>
-        <md-button class="md-raised"
-                   style="margin-top: 18px;"
-                   :disabled="cannotInvoke"
-                   @click="invoke()">Invoke</md-button>
+        <div style="margin-top: 18px;">
+          <md-button class="md-raised"
+                     style="margin: 6px 8px;"
+                     :disabled="cannotInvoke"
+                     @click="invoke()">Invoke</md-button>
+        </div>
         <div>
           <md-radio v-model="invocation.contentType"
                     value="text">Text</md-radio>
@@ -64,7 +66,7 @@
           <md-radio v-model="invocation.contentType"
                     value="binary">Download</md-radio>
         </div>
-        <md-field>
+        <md-field style="margin-top: -16px;">
           <label>Request Body</label>
           <md-textarea class="request monospace"
                        v-model="invocation.request"

@@ -175,5 +175,6 @@ export default {
 <style scoped>
 .md-drawer {
   width: 320px;
+  min-height: 100vh;
 }
 </style>

@@ -86,4 +86,11 @@ export default {
 .md-dialog {
   width: 70%;
 }
+span.md-dialog-title.md-title {
+  background-color: rgb(63, 81, 181);
+  color: rgba(255, 255, 255, 0.87);
+  margin-bottom: 0;
+  padding-top: 21px;
+  padding-bottom: 17px;
+}
 </style>
