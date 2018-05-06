@@ -29,7 +29,6 @@
 </template>
 
 <script>
-import axios from 'axios';
 import FuncStore from '@/components/FuncStore';
 import FuncForm from '@/components/FuncForm';
 
@@ -55,9 +54,9 @@ export default {
       this.newFunction = func;
     },
     opened() {
-      axios.get('https://raw.githubusercontent.com/openfaas/store/master/store.json')
-        .then(res => {
-          this.storeFunctions = res.data;
+      this.$functions.fetchStore()
+        .then(data => {
+          this.storeFunctions = data;
         })
         .catch(err => {
           console.error(err);
@@ -71,9 +70,9 @@ export default {
       this.$refs.form.submit();
     },
     newFunctionSubmitted(func) {
-      axios.post('../system/functions', func)
+      this.$functions.create(func)
         .then(res => {
-          console.log('success', res);
+          this.$emit('func-created', res);
         })
         .catch(err => {
           console.error('error', err);
