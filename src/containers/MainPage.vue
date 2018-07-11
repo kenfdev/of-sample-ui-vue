@@ -1,5 +1,17 @@
 <template>
-  <md-app>
+  <v-app>
+    <v-navigation-drawer permanent>
+      <func-side-nav :functions="functions" :selected-function="selectedFunction" @selected="showFunction" @new-func-requested="showNewFuncDialog"></func-side-nav>
+      <new-func-dialog :show-dialog="isShowNewFuncDialog" @closed="onDialogClose" @func-created="onFuncCreated"></new-func-dialog>
+    </v-navigation-drawer>
+    <v-content>
+      <v-container fluid>
+        <!-- <func-detail v-if="selectedFunction" :func="selectedFunction" :invocation-in-progress="invocationInProgress" :invocation-status="invocationStatus" :round-trip-duration="roundTripDuration" :invocation-response="invocationResponse" @invoked="onInvoke" @deleted="onDelete"></func-detail> -->
+        <!-- <p v-else>Select a Function</p> -->
+      </v-container>
+    </v-content>
+  </v-app>
+  <!-- <md-app>
     <md-app-drawer md-permanent="clipped"
                    class="md-elevation-3">
       <func-side-nav :functions="functions"
@@ -27,7 +39,7 @@
         <span>{{ toastContent }}</span>
       </md-snackbar>
     </md-app-content>
-  </md-app>
+  </md-app> -->
 </template>
 
 <script>

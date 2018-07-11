@@ -1,6 +1,6 @@
 <template>
   <div>
-    <md-app-toolbar class="indigo"
+    <!-- <md-app-toolbar class="indigo"
                     md-elevation="0">
       <a href="https://www.openfaas.com/"
          target="_blank"><img src="static/img/icon.png"
@@ -30,7 +30,35 @@
           <md-divider v-if="!(index === viewableFunctions.length - 1)"></md-divider>
         </div>
       </md-list>
-    </md-content>
+    </md-content> -->
+    <v-toolbar color="indigo" flat>
+      <v-list>
+        <v-list-tile>
+          <v-list-tile-title class="title">
+            OpenFaaS Portal
+          </v-list-tile-title>
+        </v-list-tile>
+      </v-list>
+    </v-toolbar>
+
+    <v-divider></v-divider>
+
+    <v-list dense class="pt-0">
+      <v-list-tile @click="deployNewFunction()">
+        <v-list-tile-action>
+          <v-icon>shop_two</v-icon>
+        </v-list-tile-action>
+        <v-list-tile-content>
+          <v-list-tile-title>Deploy New Function</v-list-tile-title>
+        </v-list-tile-content>
+      </v-list-tile>
+      <v-list-tile v-for="(func, index) in viewableFunctions" :key="index" @click="functionSelected(func)">
+
+        <v-list-tile-content>
+          <v-list-tile-title>{{ func.name }}</v-list-tile-title>
+        </v-list-tile-content>
+      </v-list-tile>
+    </v-list>
 
   </div>
 </template>
@@ -66,36 +94,4 @@ export default {
 </script>
 
 <style scoped>
-.md-toolbar {
-  background-color: rgb(63, 81, 181);
-}
-
-.md-content.md-theme-default {
-  background-color: rgb(255, 255, 255);
-}
-
-.md-list-item-button {
-  font-size: 16px;
-}
-
-.function-list .md-list-item-button {
-  height: 88px;
-}
-
-.md-toolbar h3.md-title {
-  color: rgba(255, 255, 255, 0.87);
-  margin-left: 0px;
-}
-
-.layout-padding {
-  padding: 16px;
-}
-
-.md-list-item-content > .md-icon:first-child {
-  margin-right: 16px;
-}
-
-.md-field {
-  margin-bottom: 8px;
-}
 </style>

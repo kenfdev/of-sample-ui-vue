@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <!-- <div>
     <md-list-item :class="{ selected: isSelected }"
                   @click="selectItem(item)">
       <img v-if="item.icon"
@@ -22,7 +22,20 @@
       </md-button>
     </md-list-item>
     <md-divider class="md-inset"></md-divider>
-  </div>
+  </div> -->
+  <v-list-tile avatar>
+    <v-list-tile-avatar :class="{ 'no-icon': !item.icon }">
+      <img v-if="item.icon" :src="item.icon">
+      <span v-else>{{ item.title | limit(1) }}</span>
+    </v-list-tile-avatar>
+    <v-list-tile-content>
+      <v-list-tile-title>{{ item.title }}</v-list-tile-title>
+      <v-list-tile-sub-title>{{ item.description }}</v-list-tile-sub-title>
+    </v-list-tile-content>
+    <v-list-tile-action v-if="item.repo_url">
+      <v-icon>link</v-icon>
+    </v-list-tile-action>
+  </v-list-tile>
 </template>
 
 <script>
@@ -44,7 +57,7 @@ export default {
 .md-list-item-text {
   white-space: normal;
 }
-span.md-avatar {
+.no-icon .v-avatar {
   font-size: 16px;
   font-weight: bold;
   line-height: 40px;
@@ -52,5 +65,4 @@ span.md-avatar {
   background-color: #1398d6;
   color: white;
 }
-
 </style>

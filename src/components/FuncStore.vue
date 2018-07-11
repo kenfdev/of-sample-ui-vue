@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <!-- <div>
     <md-content>
       <md-field>
         <label>Search for Function</label>
@@ -15,6 +15,13 @@
         </func-store-list-item>
       </md-list>
     </md-content>
+  </div> -->
+  <div>
+    <v-text-field label="Search for Function" prepend-icon="search" v-model="search"></v-text-field>
+    <v-list dense class="pt-0">
+      <func-store-list-item v-for="(func, index) in viewableFunctions" :key="index" :item="func" :is-selected="isFunctionSelected(func)" @selected="functionSelected" @link-clicked="openRepo">
+      </func-store-list-item>
+    </v-list>
   </div>
 </template>
 

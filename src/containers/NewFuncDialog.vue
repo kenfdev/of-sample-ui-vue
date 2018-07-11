@@ -1,5 +1,5 @@
 <template>
-  <md-dialog :md-active.sync="isDialogActive"
+  <!-- <md-dialog :md-active.sync="isDialogActive"
              @md-opened="opened()"
              @md-closed="close()">
     <md-dialog-title>Deploy A New Function</md-dialog-title>
@@ -25,7 +25,35 @@
       <md-button class="md-primary"
                  @click="submitNewFunction()">Deploy</md-button>
     </md-dialog-actions>
-  </md-dialog>
+  </md-dialog> -->
+  <v-dialog v-model="isDialogActive" scrollable persistent width="70%">
+    <v-card>
+      <v-card-title class="indigo">
+        <span class="headline">Deploy a new function</span>
+      </v-card-title>
+      <v-card-text>
+        <v-tabs slider-color="pink">
+          <v-tab href="#tab-1" ripple>
+            From Store
+          </v-tab>
+          <v-tab href="#tab-2" ripple>
+            Manually
+          </v-tab>
+          <v-tab-item id="tab-1">
+            <func-store :functions="storeFunctions" @selected="storeFuncSelected"></func-store>
+          </v-tab-item>
+          <v-tab-item id="tab-2">
+            <func-form ref="form" :model="newFunction" @submitted="newFunctionSubmitted"></func-form>
+          </v-tab-item>
+        </v-tabs>
+      </v-card-text>
+      <v-card-actions>
+        <v-spacer></v-spacer>
+        <v-btn color="blue darken-1" flat @click.native="close()">Close Dialog</v-btn>
+        <v-btn color="blue darken-1" flat @click.native="submitNewFunction()">Deploy</v-btn>
+      </v-card-actions>
+    </v-card>
+  </v-dialog>
 </template>
 
 <script>
@@ -37,8 +65,12 @@ export default {
   props: ['showDialog'],
   watch: {
     showDialog(val, oldVal) {
-      if (val !== oldVal) {
-        this.isDialogActive = val;
+      if (val === oldVal) {
+        return;
+      }
+      this.isDialogActive = val;
+      if (val === true) {
+        this.opened();
       }
     }
   },

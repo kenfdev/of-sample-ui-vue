@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <!-- <div>
     <div>
       <label>
         <i>Use this form to test a function or the
@@ -7,72 +7,45 @@
       </label>
     </div>
     <label>Define the function below:</label>
-    <form novalidate
-          class="md-layout"
-          @submit.prevent="submit">
+    <form novalidate class="md-layout" @submit.prevent="submit">
 
       <div class="md-layout md-gutter">
         <div class="md-layout-item md-size-100">
           <md-field :class="getValidationClass('image')">
             <md-tooltip md-direction="bottom">Docker image name and tag to use for function i.e. functions/alpine:latest</md-tooltip>
             <label for="docker-image">Docker image:</label>
-            <md-input name="docker-image"
-                      id="docker-image"
-                      v-model="form.image"
-                      :disabled="sending"
-                      required
-                      maxlength="200" />
-            <span class="md-error"
-                  v-if="!$v.form.image.required">The Docker image is required</span>
-            <!-- <span class="md-error"
-                  v-else-if="!$v.form.firstName.minlength">Invalid first name</span> -->
+            <md-input name="docker-image" id="docker-image" v-model="form.image" :disabled="sending" required maxlength="200" />
+            <span class="md-error" v-if="!$v.form.image.required">The Docker image is required</span>
           </md-field>
         </div>
         <div class="md-layout-item md-size-100">
           <md-field :class="getValidationClass('service')">
             <md-tooltip md-direction="bottom">Name of the function - must be a valid DNS entry</md-tooltip>
             <label for="service-name">Function name:</label>
-            <md-input name="service-name"
-                      id="service-name"
-                      v-model="form.service"
-                      :disabled="sending"
-                      required
-                      maxlength="200" />
-            <span class="md-error"
-                  v-if="!$v.form.service.required">The Function name is required</span>
-            <!-- <span class="md-error"
-                  v-else-if="!$v.form.firstName.minlength">Invalid first name</span> -->
+            <md-input name="service-name" id="service-name" v-model="form.service" :disabled="sending" required maxlength="200" />
+            <span class="md-error" v-if="!$v.form.service.required">The Function name is required</span>
           </md-field>
         </div>
         <div class="md-layout-item md-size-100">
           <md-field :class="getValidationClass('envProcess')">
             <md-tooltip md-direction="bottom">Process to run as your function i.e. 'env' or 'shasum'. Ignore if using OpenFaaS templates</md-tooltip>
             <label for="env-process">Function process (optional):</label>
-            <md-input name="env-process"
-                      id="env-process"
-                      v-model="form.envProcess"
-                      :disabled="sending"
-                      maxlength="200" />
-            <!-- <span class="md-error"
-                  v-else-if="!$v.form.firstName.minlength">Invalid first name</span> -->
+            <md-input name="env-process" id="env-process" v-model="form.envProcess" :disabled="sending" maxlength="200" />
           </md-field>
         </div>
         <div class="md-layout-item md-size-100">
           <md-field :class="getValidationClass('network')">
             <md-tooltip md-direction="bottom">Docker Swarm network, not required for other providers. Default: func_functions</md-tooltip>
             <label for="network">Network (Swarm):</label>
-            <md-input name="network"
-                      id="network"
-                      v-model="form.network"
-                      :disabled="sending"
-                      maxlength="200" />
-            <!-- <span class="md-error"
-                  v-else-if="!$v.form.firstName.minlength">Invalid first name</span> -->
+            <md-input name="network" id="network" v-model="form.network" :disabled="sending" maxlength="200" />
           </md-field>
         </div>
       </div>
     </form>
-  </div>
+  </div> -->
+  <v-form v-model="valid">
+    <v-text-field v-model="form.image" :counter="10" label="Docker image:" required></v-text-field>
+  </v-form>
 </template>
 
 <script>
@@ -162,5 +135,4 @@ export default {
 </script>
 
 <style scoped>
-
 </style>
